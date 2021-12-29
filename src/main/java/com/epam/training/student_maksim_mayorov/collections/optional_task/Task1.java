@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Task1 {
 
@@ -12,11 +11,9 @@ public class Task1 {
 
         // 1. Ввести строки из файла, записать в список. Вывести строки в файл в обратном порядке.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a file name to read: ");
-        String file = scanner.next();
+        String file = "data/data1.txt";
         List<String> lines = readFileLines(file);
-        System.out.println("Lines from file " + file);
+        System.out.println("Lines from file " + file + ":\n");
         lines.forEach(System.out::println);
         Collections.reverse(lines);
         writeFileLines(lines, file);

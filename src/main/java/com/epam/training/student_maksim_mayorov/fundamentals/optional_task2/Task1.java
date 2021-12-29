@@ -23,42 +23,42 @@ public class Task1 {
         }
         System.out.println("\nSource matrix:");
         printMatrix(matrix);
-        sortByRows(matrix);
-        System.out.println("\nMatrix with ordered rows: ");
+        System.out.print("Enter the column number relative to which to sort the rows: ");
+        int k = scanner.nextInt();
+        sortRowsByColumnValue(matrix, k - 1);
+        System.out.println("\nMatrix with ordered rows relative to " + k +" column: ");
         printMatrix(matrix);
-        sortByColumns(matrix);
-        System.out.println("\nMatrix with ordered columns: ");
+        System.out.print("Enter the row number relative to which to sort the columns: ");
+        k = scanner.nextInt();
+        sortColumnsByRowsValue(matrix, k - 1);
+        System.out.println("\nMatrix with ordered columns relative to " + k + " row: ");
         printMatrix(matrix);
-
     }
 
-    private static void sortByRows(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            boolean sorted = false;
-            while (!sorted) {
-                sorted = true;
-                for (int j = 0; j < matrix.length - 1; j++) {
-                    if (matrix[i][j] > matrix[i][j + 1]) {
-                        int temp = matrix[i][j];
-                        matrix[i][j] = matrix[i][j + 1];
-                        matrix[i][j + 1] = temp;
-                        sorted = false;
-                    }
-                }
+    private static void sortRowsByColumnValue(int[][] matrix, int k) {
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 1; i < matrix.length; i++) {
+               if (matrix[i][k] < matrix[i - 1][k]) {
+                   int[] temp = matrix[i];
+                   matrix[i] = matrix[i - 1];
+                   matrix[i - 1] = temp;
+               }
             }
         }
     }
 
-    private static void sortByColumns(int[][] matrix) {
+    private static void sortColumnsByRowsValue(int[][] matrix, int k) {
         boolean sorted = false;
         while (!sorted) {
             sorted = true;
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length - 1; j++) {
-                    if (matrix[j][i] > matrix[j + 1][i]) {
+            for (int i = 0; i < matrix.length - 1; i++) {
+                if (matrix[k][i] > matrix[k][i + 1]) {
+                    for (int j = 0; j < matrix.length; j++) {
                         int temp = matrix[j][i];
-                        matrix[j][i] = matrix[j + 1][i];
-                        matrix[j + 1][i] = temp;
+                        matrix[j][i] = matrix[j][i + 1];
+                        matrix[j][i + 1] = temp;
                         sorted = false;
                     }
                 }

@@ -11,18 +11,18 @@ public class Task3 {
 
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
-        int min = -1000;
-        int max = 1000;
         System.out.print("Enter the number of random numbers: ");
         int number = scanner.nextInt();
-        System.out.println("Random numbers with a new line:");
+        System.out.print("Enter a range of numbers(min, max): ");
+        int min = scanner.nextInt();
+        int max = scanner.nextInt();
+        System.out.println("Random numbers with a new line in a range from " + min + " to " + max);
         for (int i = 0; i < number; i++) {
             System.out.println(random.nextInt(max - min) + min);
         }
-        System.out.println("Random numbers without line breaks:");
+        System.out.println("Random numbers without line breaks in a range from " + min + " to " + max);
         for (int i = 0; i < number; i++) {
             System.out.print(random.nextInt(max - min) + min + " ");
         }
-
     }
 }

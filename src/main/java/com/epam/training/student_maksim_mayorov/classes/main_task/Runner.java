@@ -1,10 +1,5 @@
 package com.epam.training.student_maksim_mayorov.classes.main_task;
 
-import com.epam.training.student_maksim_mayorov.classes.main_task.Car;
-import com.epam.training.student_maksim_mayorov.classes.main_task.Colors;
-
-import java.util.Calendar;
-
 public class Runner {
 
     public static void main(String[] args) {
@@ -32,38 +27,12 @@ public class Runner {
                 new Car(10, "BMW", "E39", 2001, Colors.RED, 4_608, "TR479LL"),
         };
 
+        CarShowroom carShowroom = new CarShowroom(cars);
         System.out.println("BMW cars:");
-        carsOfBrand(cars, "BMW");
+        carShowroom.carsOfBrand(cars, "BMW");
         System.out.println("\nBMW E39 model cars that have been in use for more than 7 years:");
-        carsOfModelOperatedMoreThanYears(cars, "E39", 18);
+        carShowroom.carsOfModelOperatedMoreThanYears(cars, "E39", 18);
         System.out.println("\nCars of 2003 year of manufacture costing more than $6000:");
-        carsOfYearAndPrice(cars, 2003, 6000);
-
+        carShowroom.carsOfYearAndPrice(cars, 2003, 6000);
     }
-
-    public static void carsOfBrand(Car[] cars, String brand) {
-        for (Car car : cars) {
-            if (car.getBrand().equalsIgnoreCase(brand)) {
-                System.out.println(car);
-            }
-        }
-    }
-
-    public static void carsOfModelOperatedMoreThanYears (Car[] cars, String model, int nYears) {
-        for (Car car : cars) {
-            if ((Calendar.getInstance().get(Calendar.YEAR) - car.getYear()) > nYears
-                    && car.getModel().equals(model)) {
-                System.out.println(car);
-            }
-        }
-    }
-
-    public static void carsOfYearAndPrice(Car[] cars, int year, int price) {
-        for (Car car : cars) {
-            if (car.getYear() == year && car.getPrice() > price) {
-                System.out.println(car);
-            }
-        }
-    }
-
 }

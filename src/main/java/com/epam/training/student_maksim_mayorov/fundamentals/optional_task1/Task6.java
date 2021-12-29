@@ -1,6 +1,6 @@
 package com.epam.training.student_maksim_mayorov.fundamentals.optional_task1;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Task6 {
 
@@ -17,13 +17,14 @@ public class Task6 {
         for (int i = 0; i < n; i++) {
             numbers[i] = scanner.nextInt();
         }
+        List<String> ascendingDigits = new ArrayList<>();
         for (int number: numbers) {
             if (isDigitsAscending(number)) {
-                System.out.println("Number in which the digits are in strict ascending order: " + number);
-                break;
+                ascendingDigits.add(String.valueOf(number));
             }
         }
-
+        ascendingDigits.sort(String::compareTo);
+        System.out.println("Number in which the digits are in strict ascending order: " + ascendingDigits.get(0));
     }
 
     private static boolean isDigitsAscending(int number) {

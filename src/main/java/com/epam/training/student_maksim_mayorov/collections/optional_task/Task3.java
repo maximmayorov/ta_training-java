@@ -11,9 +11,7 @@ public class Task3 {
 
         // 3. Создать список из элементов каталога и его подкаталогов.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a directory name to read: ");
-        String directory = scanner.next();
+        String directory = "data";
         File dir = new File(directory);
         if (dir.exists() && dir.isDirectory()) {
             readDirectory(dir).forEach(System.out::println);

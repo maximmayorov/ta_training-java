@@ -11,14 +11,12 @@ public class Task6 {
 
         // 6. Ввести строки из файла, записать в список ArrayList. Выполнить сортировку строк, используя метод sort() из класса Collections.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a file name to read: ");
-        String file = scanner.next();
-        List<String> lines = readFile(file);
+        List<String> lines = readFile("data/data2.txt");
         Collections.sort(lines, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
+                // Sorting in ascending order of string length
+                return o1.length() - o2.length();
             }
         });
         lines.forEach(System.out::println);
