@@ -1,42 +1,26 @@
 package com.epam.training.student_maksim_mayorov.io.main_task;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileTreeReader {
+public class DirectoryStructureReader {
 
-    public static final String FOLDER_PREFIX = "-----";
-    private String fileName;
-    private List<String> folders;
-    private List<String> files;
+    private final String fileName;
+    private final List<String> folders;
+    private final List<String> files;
 
 
-    public FileTreeReader(String fileName) {
+    public DirectoryStructureReader(String fileName) {
         this.folders = new ArrayList<>();
         this.files = new ArrayList<>();
         this.fileName = fileName;
         processFile();
     }
 
-    private List<String> readFile() {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
     private void processFile() {
-        List<String> fileLines = readFile();
+        List<String> fileLines = FileProcessor.readFile(fileName);
         if (!fileLines.isEmpty()) {
+            // Delete root folder
             fileLines.remove(0);
         }
         for (String line: fileLines) {
@@ -44,8 +28,8 @@ public class FileTreeReader {
             if (line.equals("")) {
                 continue;
             }
-            if (line.startsWith(FOLDER_PREFIX)) {
-                folders.add(line.replace(FOLDER_PREFIX, ""));
+            if (line.startsWith(FileProcessor.FOLDER_PREFIX)) {
+                folders.add(line.replace(FileProcessor.FOLDER_PREFIX, ""));
             } else {
                 files.add(line);
             }
@@ -71,5 +55,4 @@ public class FileTreeReader {
     public double getAverageNumberFilesInFolder() {
         return files.size() / (double) folders.size();
     }
-
 }

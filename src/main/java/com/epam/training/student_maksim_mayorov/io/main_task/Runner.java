@@ -1,12 +1,7 @@
 package com.epam.training.student_maksim_mayorov.io.main_task;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Runner {
 
@@ -27,52 +22,23 @@ public class Runner {
             System.out.println("No command line arguments with directory name or file name");
             return;
         }
-        String fileName = args[0];
-        File root = new File(fileName);
-        if (root.exists()) {
-            if (root.isFile()) {
-                FileTreeReader fileTreeReader = new FileTreeReader(fileName);
-                System.out.println("Number of folders: " + fileTreeReader.getNumberOfFolders());
-                System.out.println("Number of files: " + fileTreeReader.getNumberOfFiles());
-                System.out.println("Average number of files per folder: " + fileTreeReader.getAverageNumberFilesInFolder());
-                System.out.println("Average file name length: " + fileTreeReader.getAverageFileNameLength());
+        File file = new File(args[0]);
+        if (file.exists()) {
+            if (file.isFile()) {
+                DirectoryStructureReader directoryStructureReader = new DirectoryStructureReader(args[0]);
+                System.out.println("Number of folders: " + directoryStructureReader.getNumberOfFolders());
+                System.out.println("Number of files: " + directoryStructureReader.getNumberOfFiles());
+                System.out.println("Average number of files per folder: " + directoryStructureReader.getAverageNumberFilesInFolder());
+                System.out.println("Average file name length: " + directoryStructureReader.getAverageFileNameLength());
             } else {
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter a filename to writing the structure of folders and files: ");
-                String file = scanner.next();
-                List<String> directoryList = new ArrayList<>();
-                directoryList.add(root.getName());
-                directoryList.addAll(readDirectory(root, 0));
-                writeFile(directoryList, file);
+                String outputFile = "data/directoryStructure.txt";
+                List<String> directoryLines = FileProcessor.readDirectory(file, 0);
+                directoryLines.add(0, file.getName());
+                System.out.println("The file and folder structure of the " + args[0] +" directory will be written to " + outputFile);
+                FileProcessor.writeFile(directoryLines, outputFile);
             }
-        }
-    }
-
-    private static List<String> readDirectory(File directory, int level) {
-        List<String> filesList = new ArrayList<>();
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    filesList.add("\t|" + "\t\t|".repeat(level) + FileTreeReader.FOLDER_PREFIX + file.getName());
-                    filesList.addAll(readDirectory(file, level + 1));
-                    filesList.add("\t|" + "\t\t".repeat(level));
-                } else {
-                    filesList.add("\t" + "|\t\t".repeat(level) + file.getName());
-                }
-            }
-        }
-        return filesList;
-    }
-
-    private static void writeFile(List<String> lines, String file) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String string: lines) {
-                writer.write(string);
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("Directory or file doesn't exist");
         }
     }
 }
