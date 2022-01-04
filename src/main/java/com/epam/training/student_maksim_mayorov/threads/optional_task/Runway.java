@@ -9,7 +9,7 @@ public class Runway {
     }
 
     public void takePlane(Plane plane) {
-        System.out.println(name + " took the " + plane.getName());
+        System.out.println(name + " took " + plane.getName());
     }
 
     public void release() {

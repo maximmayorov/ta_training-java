@@ -16,6 +16,7 @@ public class Car extends Thread {
 
     @Override
     public void run() {
+        // Parking time and waiting time for free space are generated randomly in the range from minTimeout to maxTimeout
         int minTimeout = 2500;
         int maxTimeout = 7500;
         if (parking.park(this, random.nextInt((maxTimeout - minTimeout) + minTimeout))) {
@@ -27,7 +28,7 @@ public class Car extends Thread {
             }
             parking.leave(this);
         } else {
-            System.out.println(getName() + " didn't wait for a free parking space and drove away");
+            System.out.println(getName() + " didn't wait for a free parking space and drove to another parking");
         }
     }
 }

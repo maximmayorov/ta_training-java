@@ -17,7 +17,7 @@ public class Plane extends Thread {
         try {
             Runway runway = runways.take();
             runway.takePlane(this);
-            System.out.println(this.getName() + " began to enter the " + runway.getName());
+            System.out.println(this.getName() + " began to enter " + runway.getName());
             TimeUnit.SECONDS.sleep(3);
             System.out.println(this.getName() + " took off from " + runway.getName());
             runway.release();

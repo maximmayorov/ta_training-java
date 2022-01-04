@@ -10,18 +10,18 @@ public class Parking {
     private final ReentrantLock lock = new ReentrantLock(true);
     private final Condition condition = lock.newCondition();
     private final List<Car> cars = new ArrayList<>();
-    private final int maxFreePlaces;
+    private final int maxFreeParkingSpaces;
 
-    public Parking(int maxFreePlaces) {
-        this.maxFreePlaces = maxFreePlaces;
+    public Parking(int maxFreeParkingSpaces) {
+        this.maxFreeParkingSpaces = maxFreeParkingSpaces;
     }
 
     public boolean park(Car car, int waitingTimeMillis) {
         long nanos = TimeUnit.MILLISECONDS.toNanos(waitingTimeMillis);
         lock.lock();
         try {
-            System.out.println(car.getName() + " drove up to the parking lot");
-            while (cars.size() >= maxFreePlaces) {
+            System.out.println(car.getName() + " drove up to the parking");
+            while (cars.size() >= maxFreeParkingSpaces) {
                 if (nanos <= 0L) {
                     return false;
                 }
@@ -42,11 +42,10 @@ public class Parking {
         lock.lock();
         try {
             cars.remove(car);
-            System.out.println(car.getName() + " leave from parking lot");
+            System.out.println(car.getName() + " leave from parking");
             condition.signal();
         } finally {
             lock.unlock();
         }
     }
-
 }
