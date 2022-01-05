@@ -3,20 +3,19 @@ package com.epam.training.student_maksim_mayorov.io.optional_task;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Task2 {
 
     public static void main(String[] args) {
 
-        // 2. Прочитать текст Java-программы и все слова public в объявлении атрибутов и методов класса заменить на слово private.
+//        Задание. Выполнить указанные действия по чтению информации из файла, ее обработке и записи в файл.
+//        При разработке для вывода результатов создавать новую директорию и файл средствами класса File.
+//
+//        2. Прочитать текст Java-программы и все слова public в объявлении атрибутов и методов класса заменить на слово private.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a file name to read: ");
-        String inputFile = scanner.next();
         List<String> programCode = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/javaProgram.txt"))) {
             programCode = reader.lines().map(s -> s.replace("public", "private")).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
@@ -25,7 +24,7 @@ public class Task2 {
     }
 
     private static void writeFile(List<String> lines) {
-        String resultFile = "results/result.txt";
+        String resultFile = "data/task2/javaProgram.txt";
         File file = new File(resultFile);
         if (file.getParentFile().mkdirs()) {
             System.out.println("A directory with results has been created");

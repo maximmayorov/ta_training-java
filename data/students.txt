@@ -1,0 +1,5 @@
+student1 5 10 8 7 8 6 7
+student2 10 5 3 5 4 8 9
+student3 5 4 3 8 2 8 1
+student4 8 10 5 10 7 10 5
+student5 10 8 5 9 7 8 9

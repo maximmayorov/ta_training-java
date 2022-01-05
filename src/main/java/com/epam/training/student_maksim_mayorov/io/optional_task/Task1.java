@@ -15,7 +15,7 @@ public class Task1 {
 //
 //        1. Создать и заполнить файл случайными целыми числами. Отсортировать содержимое файла по возрастанию.
 
-        String resultFile = "results/result.txt";
+        String resultFile = "data/task1/randomNumbers.txt";
         Random random = new Random();
         int[] randomNumbers = random.ints(10, -1000, 1000).toArray();
         Arrays.sort(randomNumbers);

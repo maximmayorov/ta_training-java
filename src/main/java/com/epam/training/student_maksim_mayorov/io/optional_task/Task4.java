@@ -3,16 +3,17 @@ package com.epam.training.student_maksim_mayorov.io.optional_task;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Task4 {
+
     public static void main(String[] args) {
 
-        // 4. Прочитать текст Java-программы и в каждом слове длиннее двух символов все строчные символы заменить прописными.
+//        Задание. Выполнить указанные действия по чтению информации из файла, ее обработке и записи в файл.
+//        При разработке для вывода результатов создавать новую директорию и файл средствами класса File.
+//
+//        4. Прочитать текст Java-программы и в каждом слове длиннее двух символов все строчные символы заменить прописными.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter file to read: ");
-        String file = scanner.next();
+        String file = "data/javaProgram.txt";
         List<String> programCode = readFile(file);
         for (int i = 0; i < programCode.size(); i++) {
             String[] words = programCode.get(i).split("\\s+");
@@ -41,7 +42,7 @@ public class Task4 {
     }
 
     private static void writeFile(List<String> lines) {
-        String resultFile = "results/result.txt";
+        String resultFile = "data/task4/javaProgram.txt";
         File file = new File(resultFile);
         if (file.getParentFile().mkdirs()) {
             System.out.println("A directory with results has been created");
@@ -53,7 +54,7 @@ public class Task4 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String string: lines) {
                 writer.write(string);
                 writer.newLine();

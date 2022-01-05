@@ -3,17 +3,17 @@ package com.epam.training.student_maksim_mayorov.io.optional_task;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Task5 {
 
     public static void main(String[] args) {
 
-        // 5. В файле, содержащем фамилии студентов и их оценки, записать прописными буквами фамилии тех студентов, которые имеют средний балл более 7.
+//        Задание. Выполнить указанные действия по чтению информации из файла, ее обработке и записи в файл.
+//        При разработке для вывода результатов создавать новую директорию и файл средствами класса File.
+//
+//        5. В файле, содержащем фамилии студентов и их оценки, записать прописными буквами фамилии тех студентов, которые имеют средний балл более 7.
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter file to read: ");
-        String file = scanner.next();
+        String file = "data/students.txt";
         List<String> students = readFile(file);
         for (int i = 0; i < students.size(); i++) {
             String[] words = students.get(i).split("\\s+");
@@ -26,7 +26,6 @@ public class Task5 {
             }
             students.set(i, String.join(" ", words));
         }
-        students.forEach(System.out::println);
         writeFile(students);
     }
 
@@ -45,7 +44,7 @@ public class Task5 {
     }
 
     private static void writeFile(List<String> lines) {
-        String resultFile = "results/result.txt";
+        String resultFile = "data/task5/students.txt";
         File file = new File(resultFile);
         if (file.getParentFile().mkdirs()) {
             System.out.println("A directory with results has been created");
@@ -57,7 +56,7 @@ public class Task5 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String string: lines) {
                 writer.write(string);
                 writer.newLine();
