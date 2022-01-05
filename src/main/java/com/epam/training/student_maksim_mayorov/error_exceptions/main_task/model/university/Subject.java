@@ -2,14 +2,12 @@ package com.epam.training.student_maksim_mayorov.error_exceptions.main_task.mode
 
 import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.exceptions.GradeOutOfRangeException;
 
-import java.util.List;
-
 public class Subject {
 
     private final String name;
-    private final List<Integer> grades;
+    private final int[] grades;
 
-    public Subject(String name, List<Integer> grades) {
+    public Subject(String name, int[] grades) {
         this.name = name;
         this.grades = grades;
     }
@@ -22,7 +20,7 @@ public class Subject {
             }
             sum += grade;
         }
-        return sum / (double) grades.size();
+        return sum / (double) grades.length;
     }
 
     public String getName() {

@@ -27,19 +27,19 @@ public class Runner {
 //        Отсутствие факультетов в университете
 
         Student student1 = new Student(Arrays.asList(
-                new Subject("Algebra", Arrays.asList(3, 2, 4, 5, 5,5, 5, 4)),
-                new Subject("Physics", Arrays.asList(3, 2, 4, 2,5 ,5, 3, 4)),
-                new Subject("History", Arrays.asList(5, 2, 4, 5, 5,4, 5, 4))), "Student1");
+                new Subject("Algebra", new int[] {3, 2, 4, 5, 5,5, 5, 4}),
+                new Subject("Physics", new int[] {3, 2, 4, 2,5 ,5, 3, 4}),
+                new Subject("History", new int[] {5, 2, 4, 5, 5,4, 5, 4})), "Student1");
 
         Student student2 = new Student(Arrays.asList(
-                new Subject("Algebra", Arrays.asList(3, 2, 3, 2, 5,4, 3, 5)),
-                new Subject("Physics", Arrays.asList(3, 2, 3, 5,5 ,5, 3, 5)),
-                new Subject("History", Arrays.asList(5, 2, 3, 4, 5,4, 5, 5))), "Student2");
+                new Subject("Algebra", new int[] {3, 2, 3, 2, 5,4, 3, 5}),
+                new Subject("Physics", new int[] {3, 2, 3, 5,5 ,5, 3, 5}),
+                new Subject("History", new int[] {5, 2, 3, 4, 5,4, 5, 5})), "Student2");
 
         Student student3 = new Student(Arrays.asList(
-                new Subject("Algebra", Arrays.asList(3, 4, 4, 4, 5,4, 3, 5)),
-                new Subject("Physics", Arrays.asList(4, 4, 3, 5,5 ,4, 3, 2)),
-                new Subject("History", Arrays.asList(4, 2, 3, 3, 2,5, 5, 5))), "Student3");
+                new Subject("Algebra", new int[] {3, 4, 4, 4, 5,4, 3, 5}),
+                new Subject("Physics", new int[] {4, 4, 3, 5,5 ,4, 3, 2}),
+                new Subject("History", new int[] {4, 2, 3, 3, 2,5, 5, 5})), "Student3");
 
         List<Student> students = new ArrayList<>();
         students.add(student1);
@@ -52,7 +52,5 @@ public class Runner {
         System.out.println("Student: " + student1.getName() + ", average grade in all subjects of the student: " + student1.averageStudentGrade());
         university.printAverageGradeInGroup("Faculty1", "Group1", "Algebra");
         university.printAverageGradeBySubject("Algebra");
-
     }
-
 }
