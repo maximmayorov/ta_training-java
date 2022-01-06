@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Parking {
-    private final ReentrantLock lock = new ReentrantLock(true);
+    private final Lock lock = new ReentrantLock(true);
     private final Condition condition = lock.newCondition();
     private final List<Car> cars = new ArrayList<>();
     private final int maxFreeParkingSpaces;

@@ -1,7 +1,7 @@
 package com.epam.training.student_maksim_mayorov.io.optional_task;
 
-import java.io.*;
-import java.util.ArrayList;
+import com.epam.training.student_maksim_mayorov.io.optional_task.utils.FileProcessor;
+
 import java.util.List;
 
 public class Task4 {
@@ -13,8 +13,7 @@ public class Task4 {
 //
 //        4. Прочитать текст Java-программы и в каждом слове длиннее двух символов все строчные символы заменить прописными.
 
-        String file = "data/javaProgram.txt";
-        List<String> programCode = readFile(file);
+        List<String> programCode = FileProcessor.readFile("data/javaProgram.txt");
         for (int i = 0; i < programCode.size(); i++) {
             String[] words = programCode.get(i).split("\\s+");
             for (int j = 0; j < words.length; j++) {
@@ -24,44 +23,6 @@ public class Task4 {
             }
             programCode.set(i, String.join(" ", words));
         }
-        writeFile(programCode);
-    }
-
-    private static List<String> readFile(String file) {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
-    private static void writeFile(List<String> lines) {
-        String resultFile = "data/task4/javaProgram.txt";
-        File file = new File(resultFile);
-        if (file.getParentFile().mkdirs()) {
-            System.out.println("A directory with results has been created");
-        }
-        try {
-            if (file.createNewFile()) {
-                System.out.println("A file with results has been created");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String string: lines) {
-                writer.write(string);
-                writer.newLine();
-            }
-            System.out.println("The result of the program was written in " + resultFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileProcessor.writeFile(programCode, "data/task4/javaProgram.txt");
     }
 }

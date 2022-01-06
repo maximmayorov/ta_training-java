@@ -1,7 +1,7 @@
 package com.epam.training.student_maksim_mayorov.io.optional_task;
 
-import java.io.*;
-import java.util.ArrayList;
+import com.epam.training.student_maksim_mayorov.io.optional_task.utils.FileProcessor;
+
 import java.util.List;
 
 public class Task5 {
@@ -13,8 +13,7 @@ public class Task5 {
 //
 //        5. В файле, содержащем фамилии студентов и их оценки, записать прописными буквами фамилии тех студентов, которые имеют средний балл более 7.
 
-        String file = "data/students.txt";
-        List<String> students = readFile(file);
+        List<String> students = FileProcessor.readFile("data/students.txt");
         for (int i = 0; i < students.size(); i++) {
             String[] words = students.get(i).split("\\s+");
             double sum = 0;
@@ -26,44 +25,6 @@ public class Task5 {
             }
             students.set(i, String.join(" ", words));
         }
-        writeFile(students);
-    }
-
-    private static List<String> readFile(String file) {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
-    }
-
-    private static void writeFile(List<String> lines) {
-        String resultFile = "data/task5/students.txt";
-        File file = new File(resultFile);
-        if (file.getParentFile().mkdirs()) {
-            System.out.println("A directory with results has been created");
-        }
-        try {
-            if (file.createNewFile()) {
-                System.out.println("A file with results has been created");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String string: lines) {
-                writer.write(string);
-                writer.newLine();
-            }
-            System.out.println("The result of the program was written in " + resultFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileProcessor.writeFile(students, "data/task5/students.txt");
     }
 }

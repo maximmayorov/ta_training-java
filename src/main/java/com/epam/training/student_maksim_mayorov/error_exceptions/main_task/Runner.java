@@ -1,8 +1,11 @@
 package com.epam.training.student_maksim_mayorov.error_exceptions.main_task;
 
-import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.*;
+import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.Faculty;
+import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.Group;
+import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.Student;
+import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.Subject;
+import com.epam.training.student_maksim_mayorov.error_exceptions.main_task.model.university.University;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +29,15 @@ public class Runner {
 //        Отсутствие групп на факультете
 //        Отсутствие факультетов в университете
 
+        List<Student> students = createStudents();
+        Faculty faculty = new Faculty("Faculty1", Collections.singletonList(new Group("Group1", students)));
+        University university = new University(Collections.singletonList(faculty));
+        System.out.println("Student: " + students.get(0).getName() + ", average grade in all subjects of the student: " + students.get(0).averageStudentGrade());
+        university.printAverageGradeInGroup("Faculty1", "Group1", "Algebra");
+        university.printAverageGradeBySubject("Algebra");
+    }
+
+    private static List<Student> createStudents() {
         Student student1 = new Student(Arrays.asList(
                 new Subject("Algebra", new int[] {3, 2, 4, 5, 5,5, 5, 4}),
                 new Subject("Physics", new int[] {3, 2, 4, 2,5 ,5, 3, 4}),
@@ -40,17 +52,6 @@ public class Runner {
                 new Subject("Algebra", new int[] {3, 4, 4, 4, 5,4, 3, 5}),
                 new Subject("Physics", new int[] {4, 4, 3, 5,5 ,4, 3, 2}),
                 new Subject("History", new int[] {4, 2, 3, 3, 2,5, 5, 5})), "Student3");
-
-        List<Student> students = new ArrayList<>();
-        students.add(student1);
-        students.add(student2);
-        students.add(student3);
-
-        Faculty faculty = new Faculty("Faculty1", Collections.singletonList(new Group("Group1", students)));
-        University university = new University(Collections.singletonList(faculty));
-
-        System.out.println("Student: " + student1.getName() + ", average grade in all subjects of the student: " + student1.averageStudentGrade());
-        university.printAverageGradeInGroup("Faculty1", "Group1", "Algebra");
-        university.printAverageGradeBySubject("Algebra");
+        return Arrays.asList(student1, student2, student3);
     }
 }

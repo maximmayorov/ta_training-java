@@ -1,4 +1,6 @@
-package com.epam.training.student_maksim_mayorov.io.main_task;
+package com.epam.training.student_maksim_mayorov.io.main_task.utils;
+
+import com.epam.training.student_maksim_mayorov.io.main_task.utils.constants.GlobalConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +26,12 @@ public class DirectoryStructureReader {
             fileLines.remove(0);
         }
         for (String line: fileLines) {
-            line = line.replace("|", "").trim();
+            line = line.replace(GlobalConstants.FILE_PREFIX, "").trim();
             if (line.equals("")) {
                 continue;
             }
-            if (line.startsWith(FileProcessor.FOLDER_PREFIX)) {
-                folders.add(line.replace(FileProcessor.FOLDER_PREFIX, ""));
+            if (line.startsWith(GlobalConstants.FOLDER_PREFIX)) {
+                folders.add(line.replace(GlobalConstants.FOLDER_PREFIX, ""));
             } else {
                 files.add(line);
             }
