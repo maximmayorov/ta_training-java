@@ -40,10 +40,11 @@ public class FileProcessor {
         if (files != null) {
             for (File item : files) {
                 if (item.isDirectory()) {
-                    filesList.add("\t|" + "\t\t|".repeat(level) + GlobalConstants.FOLDER_PREFIX + item.getName());
+                    filesList.add("\t" + GlobalConstants.FILE_PREFIX +
+                            ("\t\t" + GlobalConstants.FILE_PREFIX).repeat(level) + GlobalConstants.FOLDER_PREFIX + item.getName());
                     filesList.addAll(readDirectory(item, level + 1));
                 } else {
-                    filesList.add("\t" + "|\t\t".repeat(level) + item.getName());
+                    filesList.add("\t" + (GlobalConstants.FILE_PREFIX + "\t\t").repeat(level) + item.getName());
                 }
             }
         }
